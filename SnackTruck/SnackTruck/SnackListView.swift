@@ -13,40 +13,63 @@ import SwiftUI
  Main app view that combines all individual view elements.
  */
 struct SnackListView: View {
-    @State var itemsSelected = Set<String>()
+    @EnvironmentObject var itemsSelected : OrderRequestList
+    @State var showOrderView = false
+    @State var showOperatorView = false
+    @State var showVeggies = true
+    @State var showNonVeggies = true
+    
+    // Filters SnackData based on showVeggie and showNonVeggie toggles
+    var filteredMenu: [SnackData] {
+        return snackData.filter({ (item) -> Bool in
+            return ((self.showVeggies && item.snackType == SnackType.veggie) ||
+                    (self.showNonVeggies && item.snackType == SnackType.nonVeggie))
+        })
+    }
+    
     var body: some View {
-        NavigationView {
             VStack {
-                HStack {
-                    Text("Snack Attack Menu")
+                HStack(alignment: .top) {
+                    Text("SnackTruck")
                         .font(.title)
+                        .padding()
+                    Spacer()
                 }
-                .frame(alignment: .top)
                 
                 HStack {
-                    Spacer()
-                    Text("Veggie")
-                        .font(.headline)
-                        .foregroundColor(Color.green)
-                    Spacer()
-                    Text("Non-Veggie")
-                        .font(.headline)
-                        .foregroundColor(Color.red)
-                    Spacer()
+                    VStack {
+                        Text("Veggie")
+                            .font(.headline)
+                            .foregroundColor(Color.green)
+                        Toggle("Veggie", isOn: $showVeggies)
+                            .labelsHidden()
+                    }
+                    .padding(.horizontal, 25)
+                    
+                    VStack {
+                        Text("Non-Veggie")
+                            .font(.headline)
+                            .foregroundColor(Color.red)
+                        Toggle("Non-Veggie", isOn: $showNonVeggies)
+                            .labelsHidden()
+                    }
+                    .padding(.horizontal, 25)
                 }
-        //            ScrollView(.vertical, showsIndicators: true) {
-        //                VStack {
-        //                    ForEach(snackData) { snack in
-        //                        SnackItemView(snackItem: snack)}
-        //                }
-        //            }
                 
-                // Creates a list of SnackItemView
+                // Creates a list of SnackItemView and handles the addition/removal of snack items to the order list
                 List {
-                    ForEach(snackData) { snack in
-                        SnackItemView(snackItem: snack)
+                    ForEach(filteredMenu) { snack in
+                        SnackItemView(snackItem: snack, isItemSelected: self.itemsSelected.isItemOrdered(snack: snack)) {
+                            if (self.itemsSelected.isItemOrdered(snack: snack)) {
+                                self.itemsSelected.removeItem(snack: snack)
+                            }
+                            else {
+                                self.itemsSelected.addItem(snack: snack)
+                            }
+                        }
                     }
                 }
+    
                     
                 // Adds a footer to the table view to remove extra divider lines
                 // introduced by List
@@ -55,21 +78,29 @@ struct SnackListView: View {
                 }
                 
                 HStack {
-                    Text("Submit")
-                        .font(.headline)
-                    
-                    //NavigationLink(destination: )
+                    Button(action: {self.showOrderView = true}) {
+                        HStack {
+                            Text("Submit")
+                                .fontWeight(.semibold)
+                                .padding(.horizontal)
+                        }
+                        .padding()
+                    }
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(40)
+                    .sheet(isPresented: $showOrderView) {
+                        OrderConfirmationView(showModal: self.$showOrderView, showVeggies: self.$showVeggies, showNonVeggies: self.$showNonVeggies)
+                            .environmentObject(self.itemsSelected)
+                    }
                 }
             }
-            .frame(maxHeight: .infinity, alignment: .topLeading)
-            .navigationBarHidden(true)
-            .navigationBarTitle("")
+            .frame(maxHeight: .infinity)
         }
-    }
 }
 
-struct SnackListView_Previews: PreviewProvider {
-    static var previews: some View {
-        SnackListView()
-    }
-}
+//struct SnackListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SnackListView(appState)
+//    }
+//}

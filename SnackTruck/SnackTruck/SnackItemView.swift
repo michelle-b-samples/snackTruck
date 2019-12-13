@@ -8,46 +8,37 @@
 
 import SwiftUI
 
+/*
+    SnackItemView - View that contains the checkbox and item name for each
+        SnackData item. Handles the coloring of item name based on snackType and
+        manages the checkbox images.
+ */
 struct SnackItemView: View {
-    @State var isItemSelected : Bool = false
     var snackItem : SnackData
-    
-    private func toggle() {
-        isItemSelected = !isItemSelected
-        if (isItemSelected) {
-            orderRequestList.insertItem(itemName: snackItem.name)
-        }
-        else {
-            orderRequestList.removeItem(itemName: snackItem.name)
-        }
-    }
+    var isItemSelected : Bool
+    var action: () -> Void
     
     var body: some View {
-        HStack {
-            // Creates a checkbox
-            Button(action: toggle) {
-                Image(systemName: isItemSelected ? "checkmark.square" : "square")
-            }
-            
-            if (snackItem.snackType == SnackType.veggie) {
-                // Green text if item is veggie
+        
+        Button(action: self.action) {
+            HStack {
+                // Creates a checkbox
+                Image(systemName: (isItemSelected ? "checkmark.square" : "square"))
+                
                 Text(snackItem.name)
-                    .foregroundColor(Color.green)
-            }
-            else if (snackItem.snackType == SnackType.nonVeggie) {
-                // Red text if item is non-veggie
-                Text(snackItem.name)
-                    .foregroundColor(Color.red)
+                .foregroundColor((snackItem.snackType == SnackType.veggie) ? Color.green : Color.red)
+                .fontWeight(isItemSelected ? .medium : .regular)
+                .font(.body)
             }
         }
     }
 }
 
-struct SnackItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            SnackItemView(snackItem: snackData[0])
-            SnackItemView(snackItem: snackData[1])
-        }
-    }
-}
+//struct SnackItemView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            SnackItemView(snackItem: snackData[0])
+//            SnackItemView(snackItem: snackData[1])
+//        }
+//    }
+//}

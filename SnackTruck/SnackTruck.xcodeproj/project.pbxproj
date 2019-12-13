@@ -19,7 +19,9 @@
 		2A1F6123239F17DF00A297A3 /* SnackDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F6121239F17DF00A297A3 /* SnackDataParser.swift */; };
 		2A1F6124239F17DF00A297A3 /* snackListData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A1F6122239F17DF00A297A3 /* snackListData.json */; };
 		2A1F6127239F17EC00A297A3 /* SnackData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F6126239F17EC00A297A3 /* SnackData.swift */; };
-		2A1F612B239F6A5900A297A3 /* OrderRequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F612A239F6A5900A297A3 /* OrderRequestData.swift */; };
+		2A1F612B239F6A5900A297A3 /* OrderRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F612A239F6A5900A297A3 /* OrderRequestList.swift */; };
+		2A1F612D23A08BED00A297A3 /* OrderConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F612C23A08BED00A297A3 /* OrderConfirmationView.swift */; };
+		2A1F612F23A08FCD00A297A3 /* OrderRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F612E23A08FCD00A297A3 /* OrderRequestHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +60,9 @@
 		2A1F6121239F17DF00A297A3 /* SnackDataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnackDataParser.swift; sourceTree = "<group>"; };
 		2A1F6122239F17DF00A297A3 /* snackListData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snackListData.json; sourceTree = "<group>"; };
 		2A1F6126239F17EC00A297A3 /* SnackData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnackData.swift; sourceTree = "<group>"; };
-		2A1F612A239F6A5900A297A3 /* OrderRequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRequestData.swift; sourceTree = "<group>"; };
+		2A1F612A239F6A5900A297A3 /* OrderRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRequestList.swift; sourceTree = "<group>"; };
+		2A1F612C23A08BED00A297A3 /* OrderConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderConfirmationView.swift; path = SnackTruck/OrderConfirmationView.swift; sourceTree = SOURCE_ROOT; };
+		2A1F612E23A08FCD00A297A3 /* OrderRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRequestHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				2A1F6125239F17EC00A297A3 /* Models */,
 				2A1F6120239F17DF00A297A3 /* Data */,
 				2A100C51239F0B64000E4D64 /* AppDelegate.swift */,
+				2A1F612C23A08BED00A297A3 /* OrderConfirmationView.swift */,
+				2A1F612E23A08FCD00A297A3 /* OrderRequestHandler.swift */,
 				2A100C53239F0B64000E4D64 /* SceneDelegate.swift */,
 				2A100C55239F0B64000E4D64 /* SnackListView.swift */,
 				2A100C87239F0F03000E4D64 /* SnackItemView.swift */,
@@ -162,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				2A1F6126239F17EC00A297A3 /* SnackData.swift */,
-				2A1F612A239F6A5900A297A3 /* OrderRequestData.swift */,
+				2A1F612A239F6A5900A297A3 /* OrderRequestList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,12 +305,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A1F612F23A08FCD00A297A3 /* OrderRequestHandler.swift in Sources */,
 				2A100C52239F0B64000E4D64 /* AppDelegate.swift in Sources */,
 				2A100C54239F0B64000E4D64 /* SceneDelegate.swift in Sources */,
 				2A1F6123239F17DF00A297A3 /* SnackDataParser.swift in Sources */,
 				2A100C88239F0F03000E4D64 /* SnackItemView.swift in Sources */,
 				2A1F6127239F17EC00A297A3 /* SnackData.swift in Sources */,
-				2A1F612B239F6A5900A297A3 /* OrderRequestData.swift in Sources */,
+				2A1F612B239F6A5900A297A3 /* OrderRequestList.swift in Sources */,
+				2A1F612D23A08BED00A297A3 /* OrderConfirmationView.swift in Sources */,
 				2A100C56239F0B64000E4D64 /* SnackListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
